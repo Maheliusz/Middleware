@@ -21,11 +21,8 @@ public class MoneyCourseImpl extends MoneyCourseImplBase {
     public MoneyCourseImpl() {
         random = new Random();
         courseMap = new HashMap<>();
-        courseMap.put(Currency.FRANK, getRandomDouble());
-        courseMap.put(Currency.DOLLAR, getRandomDouble());
-        courseMap.put(Currency.BITCOIN, getRandomDouble());
-        courseMap.put(Currency.TOMATO, getRandomDouble());
-        courseMap.put(Currency.EURO, getRandomDouble());
+        Arrays.stream(Currency.values()).filter(currency -> !currency.equals(Currency.UNRECOGNIZED))
+                .forEach(currency -> courseMap.put(currency, getRandomDouble()));
         courseUpdater = new Thread(() -> {
             while(true) {
                 try {
