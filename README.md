@@ -1,6 +1,6 @@
-#Middleware
-##Zeroc ICE and gRPC project
-###Instructions
+#Middleware  
+##Zeroc ICE and gRPC project  
+###Instructions  
 Put `protoc.exe` and `protoc-gen-grpc-java.exe` in root of the project.  
 
 Run maven scripts  
