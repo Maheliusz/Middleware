@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "Bank.grpc";
+option java_outer_classname = "MoneyCourseProto";
+option objc_class_prefix = "MC";
+
+package bank;
+
+enum Currency {
+	FRANK = 0;
+    EURO = 1;
+    DOLLAR = 2;
+    TOMATO = 3;
+    BITCOIN = 4;
+}
+
+message CourseRequest {
+  repeated Currency currency = 1;
+}
+
+message Courses {
+    Currency currency = 1;
+    double res = 2;
+}
+
+message CourseResponse {
+    repeated Courses courses = 1;
+}
+
+service MoneyCourse {
+  rpc getCourse (CourseRequest) returns (stream CourseResponse) {}
+}
