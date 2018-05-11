@@ -14,8 +14,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class Server {
+    private static final Logger logger = Logger.getLogger(Server.class.getName());
     public void t1(String[] args) {
         int status = 0;
         Communicator communicator = null;
@@ -36,6 +38,8 @@ public class Server {
             ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter", String.format("tcp -h localhost -p %d:udp -h localhost -p %d", port, port));
 
             f(coursePort, courseMap);
+
+            logger.info("Server started, listening on " + port);
 
             AccountFactoryI accountFactory = new AccountFactoryI(courseMap);
 

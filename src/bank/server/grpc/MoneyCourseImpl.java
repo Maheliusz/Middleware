@@ -31,10 +31,11 @@ public class MoneyCourseImpl extends MoneyCourseImplBase {
                     System.err.println(e.toString());
                 }
                 courseMap.keySet().forEach(course -> {
-                    courseMap.put(course, getRandomDouble());
+                    getCourseMap().put(course, getRandomDouble());
                 });
             }
         });
+        courseUpdater.start();
     }
 
     @Override
@@ -42,7 +43,7 @@ public class MoneyCourseImpl extends MoneyCourseImplBase {
         while (true) {
             List<Courses> coursesList = new ArrayList<>();
             for (Currency currency : request.getCurrencyList()) {
-                coursesList.add(Courses.newBuilder().setCurrency(currency).setRes(courseMap.get(currency)).build());
+                coursesList.add(Courses.newBuilder().setCurrency(currency).setRes(getCourseMap().get(currency)).build());
             }
             CourseResponse response = CourseResponse.newBuilder().addAllCourses(coursesList).build();
             try {
