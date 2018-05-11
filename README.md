@@ -7,4 +7,8 @@ Run maven scripts
 
 Run `gen_script.bat`  
 
-Start the `MoneyCourseServer` and `Server`
+Start the `MoneyCourseServer` and `Server`  
+
+Start the `client`  
+
+Follow further instructions in programs
