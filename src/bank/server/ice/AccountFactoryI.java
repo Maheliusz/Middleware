@@ -42,6 +42,8 @@ public class AccountFactoryI implements AccountFactory {
             data.guid = UUID.randomUUID().toString();
         } while (accountDataMap.keySet().contains(data.guid));
         accountDataMap.put(data.guid, data);
+        accountPrxMap.put(data.pesel, AccountPrx.uncheckedCast(current.adapter.add(new AccountI(data, courseMap),
+                new Identity(String.valueOf(data.pesel), data.type.toString()))));
         return data.guid;
     }
 
@@ -49,12 +51,6 @@ public class AccountFactoryI implements AccountFactory {
     public AccountPrx getAccount(String guid, Current current) throws NoSuchAccountError {
         AccountData data = accountDataMap.get(guid);
         if (data == null) throw new NoSuchAccountError();
-        AccountPrx proxy = accountPrxMap.get(data.pesel);
-        if (proxy == null) {
-            proxy = AccountPrx.uncheckedCast(current.adapter.add(new AccountI(data, courseMap),
-                    new Identity(String.valueOf(data.pesel), data.type.toString())));
-            accountPrxMap.put(data.pesel, proxy);
-        }
-        return proxy;
+        return accountPrxMap.get(data.pesel);
     }
 }
